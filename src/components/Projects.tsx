@@ -21,7 +21,7 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
       name: 'Zerotreat',
       url: 'https://zerotreat.onrender.com/',
       description: 'An innovative healthcare management system designed to streamline patient care and medical processes.',
-      features: ['Patient Management', 'Appointment Scheduling', 'Medical Records', 'Analytics Dashboard'],
+      features: ['Healthy Food', 'Sugar Free', 'Diety', 'Analytics Dashboard'],
       category: 'Healthcare Snacks and Treats',
       status: 'Live'
     }
