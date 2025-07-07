@@ -13,7 +13,7 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
       url: 'https://www.kacchiprime.com/',
       description: 'A premium food ordering and delivery platform featuring authentic traditional cuisine with modern convenience.',
       features: ['Online Ordering', 'Real-time Tracking', 'Payment Integration', 'Customer Reviews'],
-      category: 'Food & Delivery',
+      category: 'Authentic Kacchi & Delivery',
       status: 'Live'
     },
     {
@@ -22,7 +22,7 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
       url: 'https://zerotreat.onrender.com/',
       description: 'An innovative healthcare management system designed to streamline patient care and medical processes.',
       features: ['Patient Management', 'Appointment Scheduling', 'Medical Records', 'Analytics Dashboard'],
-      category: 'Healthcare',
+      category: 'Healthcare Snacks and Treats',
       status: 'Live'
     }
   ];
