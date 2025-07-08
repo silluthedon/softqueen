@@ -4,7 +4,7 @@ import { ArrowRight, Code, Zap, Globe, ChevronDown } from 'lucide-react';
 interface HeroProps {
   darkMode: boolean;
   setActiveSection: (section: string) => void;
-  language?: string; // Optional: for language toggle
+  language?: string;
 }
 
 const Hero: React.FC<HeroProps> = ({ darkMode, setActiveSection, language = 'en' }) => {
@@ -24,6 +24,25 @@ const Hero: React.FC<HeroProps> = ({ darkMode, setActiveSection, language = 'en'
     }, 100);
     return () => clearInterval(typingInterval);
   }, []);
+
+  // 3D Tilt effect for feature icons
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 20;
+    const rotateY = (centerX - x) / 20;
+
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+  };
 
   // Content based on language
   const content = {
@@ -122,7 +141,7 @@ const Hero: React.FC<HeroProps> = ({ darkMode, setActiveSection, language = 'en'
             </button>
           </div>
 
-          {/* Feature Icons with Hover Animation */}
+          {/* Feature Icons with 3D Tilt and Glow Animation */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { icon: Code, ...currentContent.feature1 },
@@ -133,11 +152,15 @@ const Hero: React.FC<HeroProps> = ({ darkMode, setActiveSection, language = 'en'
                 key={index}
                 className={`p-6 rounded-xl ${
                   darkMode ? 'bg-gray-800' : 'bg-white'
-                } shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group animate-slide-up delay-${100 * (index + 2)}`}
-                role="article"
+                } shadow-lg hover:shadow-2xl transition-all duration-300 group animate-slide-up delay-${100 * (index + 2)}`}
+                onMouseMove={(e) => handleMouseMove(e, index)}
+                onMouseLeave={handleMouseLeave}
+                style={{ transformStyle: 'preserve-3d', transition: 'transform 0.2s' }}
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mb-4 mx-auto relative overflow-hidden">
-                  <feature.icon className="text-white z-10" size={24} />
+                <div
+                  className={`w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mb-4 mx-auto relative overflow-hidden animate-glow`}
+                >
+                  <feature.icon className="text-white z-10" size={32} style={{ transform: 'translateZ(20px)' }} />
                   <span className="absolute inset-0 bg-gradient-to-t from-blue-600 to-purple-500 opacity-0 group-hover:opacity-50 transition-opacity duration-300"></span>
                 </div>
                 <h3 className={`text-xl font-semibold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
@@ -164,6 +187,24 @@ const Hero: React.FC<HeroProps> = ({ darkMode, setActiveSection, language = 'en'
           </button>
         </div>
       </div>
+
+      {/* CSS for Glow Animation */}
+      <style jsx>{`
+        @keyframes glow {
+          0% {
+            box-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 10px rgba(147, 51, 234, 0.5);
+          }
+          50% {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(147, 51, 234, 0.8);
+          }
+          100% {
+            box-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 10px rgba(147, 51, 234, 0.5);
+          }
+        }
+        .animate-glow {
+          animation: glow 2s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 };

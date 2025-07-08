@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, ArrowRight, Linkedin, Twitter, Github } from 'lucide-react';
+import { supabase } from '../supabaseClient';
 
 interface ContactProps {
   darkMode: boolean;
@@ -36,6 +37,11 @@ const Contact: React.FC<ContactProps> = ({ darkMode, showToast, language = 'en' 
         email: 'Your Email',
         message: 'Your Message',
         submit: 'Send Message',
+        success: 'Message sent successfully!',
+        error: 'Failed to send message. Please try again.',
+        invalidEmail: 'Valid email is required',
+        requiredName: 'Name is required',
+        requiredMessage: 'Message is required',
       },
       social: {
         title: 'Connect With Us',
@@ -73,6 +79,11 @@ const Contact: React.FC<ContactProps> = ({ darkMode, showToast, language = 'en' 
         email: 'আপনার ইমেইল',
         message: 'আপনার বার্তা',
         submit: 'বার্তা পাঠান',
+        success: 'বার্তা সফলভাবে পাঠানো হয়েছে!',
+        error: 'বার্তা পাঠাতে ব্যর্থ। আবার চেষ্টা করুন।',
+        invalidEmail: 'বৈধ ইমেইল প্রয়োজন',
+        requiredName: 'নাম প্রয়োজন',
+        requiredMessage: 'বার্তা প্রয়োজন',
       },
       social: {
         title: 'আমাদের সাথে সংযোগ করুন',
@@ -92,19 +103,35 @@ const Contact: React.FC<ContactProps> = ({ darkMode, showToast, language = 'en' 
   const currentContent = content[language];
 
   // Form handling
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors = { name: '', email: '', message: '' };
 
-    if (!formData.name) newErrors.name = 'Name is required';
-    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Valid email is required';
-    if (!formData.message) newErrors.message = 'Message is required';
+    if (!formData.name) newErrors.name = currentContent.form.requiredName;
+    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email))
+      newErrors.email = currentContent.form.invalidEmail;
+    if (!formData.message) newErrors.message = currentContent.form.requiredMessage;
 
     setErrors(newErrors);
 
     if (!newErrors.name && !newErrors.email && !newErrors.message) {
-      showToast('Message sent successfully!');
-      setFormData({ name: '', email: '', message: '' });
+      try {
+        const { error } = await supabase
+          .from('contact_messages')
+          .insert([{ name: formData.name, email: formData.email, message: formData.message }]);
+
+        if (error) {
+          console.error('Error saving message:', error);
+          showToast(currentContent.form.error);
+          return;
+        }
+
+        showToast(currentContent.form.success);
+        setFormData({ name: '', email: '', message: '' });
+      } catch (error) {
+        console.error('Unexpected error:', error);
+        showToast(currentContent.form.error);
+      }
     }
   };
 
