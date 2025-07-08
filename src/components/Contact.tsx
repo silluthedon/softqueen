@@ -14,7 +14,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode, showToast, language = 'en' 
   // Content based on language
   const content = {
     en: {
-      title: 'Get In Touch',
+      title: 'Get In',
       subtitle: 'Ready to start your next project? We’d love to hear from you and discuss how we can help bring your ideas to life.',
       contactInfo: {
         title: 'Contact Information',

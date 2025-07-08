@@ -34,7 +34,7 @@ const Reviews: React.FC<ReviewsProps> = ({ darkMode, showToast, language = 'en' 
 
   const content = {
     en: {
-      title: 'Client Reviews',
+      title: 'Client',
       subtitle: 'See what our clients are saying about our projects and services.',
       form: {
         title: 'Leave a Review',

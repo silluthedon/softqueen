@@ -50,7 +50,7 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode, language = 'en' }) => {
 
   const content = {
     en: {
-      title: 'Our Projects',
+      title: 'Our',
       subtitle: 'Showcasing our latest innovations and successful implementations across various industries.',
       futureProjects: {
         title: 'More Projects Coming Soon',

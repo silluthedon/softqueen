@@ -10,7 +10,7 @@ const About: React.FC<AboutProps> = ({ darkMode, language = 'en' }) => {
   // Content based on language
   const content = {
     en: {
-      title: 'About Softqueen',
+      title: 'About',
       subtitle: 'We are a forward-thinking software company dedicated to creating innovative solutions that transform businesses and enhance user experiences.',
       mission: {
         title: 'Our Mission',
