@@ -46,7 +46,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
         },
         {
           title: 'Chatbot Framework',
-          url: 'https://chatbot.softqueen-demo.com',
+          url: 'https://cbot-ohr9.onrender.com',
           description: 'Engage customers with a fully customizable AI chatbot featuring natural language processing.',
           badge: 'Industry-First',
         },
