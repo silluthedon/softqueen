@@ -33,6 +33,7 @@ const Header: React.FC<HeaderProps> = ({
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
+    { id: 'products', label: 'Products' },
     { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' },
     { id: 'reviews', label: 'Reviews' },

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
+import Products from './components/Products';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Reviews from './components/Reviews';
@@ -40,6 +41,8 @@ function App() {
         return <Hero darkMode={darkMode} setActiveSection={setActiveSection} />;
       case 'about':
         return <About darkMode={darkMode} />;
+      case 'products':
+        return <Products darkMode={darkMode} />;
       case 'projects':
         return <Projects darkMode={darkMode} />;
       case 'contact':
