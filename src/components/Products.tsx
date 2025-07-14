@@ -40,7 +40,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
       demos: [
         {
           title: 'Smart Analytics Dashboard',
-          url: 'https://smart-analytics.softqueen-demo.com',
+          url: 'https://sais-hyjv.onrender.com',
           description: 'Real-time insights powered by our proprietary AI engine, delivering 99.9% accuracy.',
           badge: 'Award-Winning',
         },
