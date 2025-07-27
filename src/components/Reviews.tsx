@@ -122,7 +122,7 @@ const Reviews: React.FC<ReviewsProps> = ({ darkMode, showToast, language = 'en' 
     };
 
     fetchReviews();
-  }, [sortBy, showToast, language]);
+  }, [sortBy, showToast, language, currentContent.form.errors.rating]);
 
   // Handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
