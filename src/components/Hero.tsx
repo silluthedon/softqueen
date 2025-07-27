@@ -26,7 +26,7 @@ const Hero: React.FC<HeroProps> = ({ darkMode, setActiveSection, language = 'en'
   }, []);
 
   // 3D Tilt effect for feature icons
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -153,7 +153,7 @@ const Hero: React.FC<HeroProps> = ({ darkMode, setActiveSection, language = 'en'
                 className={`p-6 rounded-xl ${
                   darkMode ? 'bg-gray-800' : 'bg-white'
                 } shadow-lg hover:shadow-2xl transition-all duration-300 group animate-slide-up delay-${100 * (index + 2)}`}
-                onMouseMove={(e) => handleMouseMove(e, index)}
+                onMouseMove={(e) => handleMouseMove(e)}
                 onMouseLeave={handleMouseLeave}
                 style={{ transformStyle: 'preserve-3d', transition: 'transform 0.2s' }}
               >
